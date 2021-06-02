@@ -51,9 +51,10 @@
       </categories>
   </entry>
   <entry>
-    <title>Gslms</title>
+    <title>欢迎来到Gslms的博客 !</title>
     <url>/2021/06/01/hello/</url>
-    <content><![CDATA[<p>欢迎来到Gslms的博客 !</p>
+    <content><![CDATA[<!-- 欢迎来到Gslms的博客 ! -->
+
 <span id="more"></span>
 
 <p>这是我第一次尝试建立自己的博客，欢迎大家前来参观</p>
