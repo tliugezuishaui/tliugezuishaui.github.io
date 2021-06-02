@@ -79,15 +79,13 @@
 
 
 
-<meta name="description" content="个人博客搭建记录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo + Next + github 博客搭建">
 <meta property="og:url" content="http://example.com/2021/06/01/hexo/index.html">
 <meta property="og:site_name" content="Gslms">
-<meta property="og:description" content="个人博客搭建记录">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-06-01T07:26:28.000Z">
-<meta property="article:modified_time" content="2021-06-02T01:49:59.326Z">
+<meta property="article:modified_time" content="2021-06-02T06:07:58.879Z">
 <meta property="article:author" content="gslms">
 <meta name="twitter:card" content="summary">
 
@@ -321,7 +319,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -405,9 +403,48 @@
       
 
       
-        <p>个人博客搭建记录</p>
+        <meta name="referrer" content="no-referrer"/>
+
 <span id="more"></span>
 
+<h2 id="Hexo搭建步骤"><a href="#Hexo搭建步骤" class="headerlink" title="Hexo搭建步骤"></a>Hexo搭建步骤</h2><ol>
+<li>安装Git</li>
+<li>安装Node.js</li>
+<li>安装Hexo</li>
+<li>GitHub创建个人仓库</li>
+<li>生成SSH添加到GitHub</li>
+<li>将hexo部署到GitHub</li>
+</ol>
+<h3 id="1-安装Git"><a href="#1-安装Git" class="headerlink" title="1. 安装Git"></a>1. 安装Git</h3><p>  windows：到git官网上下载,<a target="_blank" rel="noopener" href="https://gitforwindows.org/">Download git</a>,下载后会有一个Git Bash的命令行工具</p>
+<h3 id="2-安装nodejs"><a href="#2-安装nodejs" class="headerlink" title="2. 安装nodejs"></a>2. 安装nodejs</h3><p>  Hexo是基于nodeJS编写的，所以需要安装一下nodeJs和里面的npm工具。<br>  windows：<a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">nodejs</a>选择LTS版本就行了。</p>
+<h3 id="3-安装Hexo"><a href="#3-安装Hexo" class="headerlink" title="3. 安装Hexo"></a>3. 安装Hexo</h3><p>  前面git和nodejs安装好后，就可以安装hexo了，你可以先创建一个文件夹blog，然后cd到这个文件夹下（或者在这个文件夹下直接右键git bash打开）。</p>
+<p>  输入命令：<code>npm install -g hexo-cli</code></p>
+<p>  接下来初始化Hexo<br>  <code>hexo init myblog</code></p>
+<p>  然后cd进入文件夹 进行安装依赖：<code>npm install</code></p>
+<p>  新建完成后，指定文件夹目录下有：</p>
+<ul>
+<li>node_modules: 依赖包</li>
+<li>public：存放生成的页面</li>
+<li>scaffolds：生成文章的一些模板</li>
+<li>source：用来存放你的文章</li>
+<li>themes：主题</li>
+<li>** _config.yml: 博客的配置文件**</li>
+</ul>
+<p>  接下来运行hexo<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure><br>  Hexo基本就完成了…</p>
+<h3 id="4-GitHub创建个人仓库"><a href="#4-GitHub创建个人仓库" class="headerlink" title="4. GitHub创建个人仓库"></a>4. GitHub创建个人仓库</h3><p>  进入<a target="_blank" rel="noopener" href="https://github.com/">github</a>网站，在gitHub.com中看到一个New repository，新建仓库</p>
+<p>  创建一个和你用户名相同的仓库，后面加.github.io，只有这样，将来要部署到GitHub page的时候，才会被识别，也就是xxxx.github.io，其中xxx就是你注册GitHub的用户名。</p>
+<p>  点击create repository。</p>
+<h3 id="5-生成SSH添加到GitHub"><a href="#5-生成SSH添加到GitHub" class="headerlink" title="5. 生成SSH添加到GitHub"></a>5. 生成SSH添加到GitHub</h3><p>  在git bash中进行如下操作<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;yourname&quot;</span><br><span class="line">git config --global user.email &quot;youremail&quot;</span><br></pre></td></tr></table></figure><br>  这里的yourname输入你的GitHub用户名，youremail输入你GitHub的邮箱。这样GitHub才能知道你是不是对应它的账户</p>
+<p>  可以用以下两条，检查一下你有没有输对<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config user.name</span><br><span class="line">git config user.email</span><br></pre></td></tr></table></figure></p>
+<p>  然后创建SSH,一路回车<br>  <code>ssh-keygen -t rsa -C &quot;youremail&quot;</code></p>
+<p>  ssh，简单来讲，就是一个秘钥，其中，id_rsa是你这台电脑的私人秘钥，不能给别人看的，id_rsa.pub是公共秘钥，可以随便给别人看。把这个公钥放在GitHub上，这样当你链接GitHub自己的账户时，它就会根据公钥匹配你的私钥，当能够相互匹配时，才能够顺利的通过git上传你的文件到GitHub上。</p>
+<p>  而后在GitHub的setting中，找到SSH keys的设置选项，点击New SSH key<br>  把你的id_rsa.pub里面的信息复制进去。</p>
+<p>  在gitbash中，查看是否成功 <code>ssh -T git@github.com</code></p>
+<h3 id="6-将hexo部署到GitHub"><a href="#6-将hexo部署到GitHub" class="headerlink" title="6.将hexo部署到GitHub"></a>6.将hexo部署到GitHub</h3><p>  这一步，我们就可以将hexo和GitHub关联起来，也就是将hexo生成的文章部署到GitHub上，打开站点配置文件 _config.yml，翻到最后，修改为<br>  YourgithubName就是你的GitHub账户<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repo: git@github.com/YourgithubName/YourgithubName.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure></p>
+<p>  这个时候需要先安装deploy-git ，也就是部署的命令,这样你才能用命令部署到GitHub。<br>  <code>npm install hexo-deployer-git --save</code><br>  然后<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure></p>
+<p>  其中 hexo clean清除了你之前生成的东西，也可以不加。<br>  hexo generate 顾名思义，生成静态文章，可以用 hexo g缩写<br>  hexo deploy 部署文章，可以用hexo d缩写</p>
+<p>  这样就可以在网站看到博客了</p>
+<p>  另外  ！！！<br>  由于hexo d上传部署到github的其实是hexo编译后的文件，是用来生成网页的，不包含源文件。<br>  所以当我们在其他电脑进行操作写作的时候 需要将源文件上传到分支。将分支克隆下来，除了git文件外其他文件进行删除，将之前的源文件复制进来替换，除了.deploy_git不进行复制。复制过来的源文件应该有一个.gitignore，用来忽略一些不需要的文件，如果没有的话，自己新建一个，在里面写上如下，表示这些类型文件不需要git：<br>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">Thumbs.db</span><br><span class="line">db.json</span><br><span class="line">*.log</span><br><span class="line">node_modules/</span><br><span class="line">public/</span><br><span class="line">.deploy*/</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -432,7 +469,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2021/06/01/hello-world/" rel="next" title="Gslms">
+              <a href="/2021/06/01/hello/" rel="next" title="Gslms">
                 <i class="fa fa-chevron-left"></i> Gslms
               </a>
             
@@ -492,13 +529,22 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
-                src="/images/avatar.gif"
+                src="/images/avatar.png"
                 alt="" />
             
               <p class="site-author-name" itemprop="name"></p>
@@ -548,6 +594,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo%E6%90%AD%E5%BB%BA%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.</span> <span class="nav-text">Hexo搭建步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85Git"><span class="nav-number">1.1.</span> <span class="nav-text">1. 安装Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85nodejs"><span class="nav-number">1.2.</span> <span class="nav-text">2. 安装nodejs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85Hexo"><span class="nav-number">1.3.</span> <span class="nav-text">3. 安装Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-GitHub%E5%88%9B%E5%BB%BA%E4%B8%AA%E4%BA%BA%E4%BB%93%E5%BA%93"><span class="nav-number">1.4.</span> <span class="nav-text">4. GitHub创建个人仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E7%94%9F%E6%88%90SSH%E6%B7%BB%E5%8A%A0%E5%88%B0GitHub"><span class="nav-number">1.5.</span> <span class="nav-text">5. 生成SSH添加到GitHub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%B0%86hexo%E9%83%A8%E7%BD%B2%E5%88%B0GitHub"><span class="nav-number">1.6.</span> <span class="nav-text">6.将hexo部署到GitHub</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
