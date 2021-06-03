@@ -14,6 +14,7 @@
 <li>GitHub创建个人仓库</li>
 <li>生成SSH添加到GitHub</li>
 <li>将hexo部署到GitHub</li>
+<li>其余补充</li>
 </ol>
 <h3 id="1-安装Git"><a href="#1-安装Git" class="headerlink" title="1. 安装Git"></a>1. 安装Git</h3><p>  windows：到git官网上下载,<a href="https://gitforwindows.org/">Download git</a>,下载后会有一个Git Bash的命令行工具</p>
 <h3 id="2-安装nodejs"><a href="#2-安装nodejs" class="headerlink" title="2. 安装nodejs"></a>2. 安装nodejs</h3><p>  Hexo是基于nodeJS编写的，所以需要安装一下nodeJs和里面的npm工具。<br>  windows：<a href="https://nodejs.org/en/download/">nodejs</a>选择LTS版本就行了。</p>
@@ -45,6 +46,11 @@
 <p>  其中 hexo clean清除了你之前生成的东西，也可以不加。<br>  hexo generate 顾名思义，生成静态文章，可以用 hexo g缩写<br>  hexo deploy 部署文章，可以用hexo d缩写</p>
 <p>  这样就可以在网站看到博客了</p>
 <p>  另外  ！！！<br>  由于hexo d上传部署到github的其实是hexo编译后的文件，是用来生成网页的，不包含源文件。<br>  所以当我们在其他电脑进行操作写作的时候 需要将源文件上传到分支。将分支克隆下来，除了git文件外其他文件进行删除，将之前的源文件复制进来替换，除了.deploy_git不进行复制。复制过来的源文件应该有一个.gitignore，用来忽略一些不需要的文件，如果没有的话，自己新建一个，在里面写上如下，表示这些类型文件不需要git：<br>  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">Thumbs.db</span><br><span class="line">db.json</span><br><span class="line">*.log</span><br><span class="line">node_modules/</span><br><span class="line">public/</span><br><span class="line">.deploy*/</span><br></pre></td></tr></table></figure></p>
+<h3 id="7-其余补充"><a href="#7-其余补充" class="headerlink" title="7. 其余补充"></a>7. 其余补充</h3><ul>
+<li>新建文章文件夹命令：<code>hexo new page title(新建文章文件夹名称)</code></li>
+<li>新建文章命令：<code>hexo new title(新建文章名称)</code></li>
+<li>设置文章更新时间：在next主题中找到_config.yml在里面查找 update 会找到一个 updated_at 的属性改为 true 即可。<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">post_meta:</span><br><span class="line">updated_at: true</span><br></pre></td></tr></table></figure></li>
+</ul>
 ]]></content>
       <categories>
         <category>Hexo</category>
@@ -59,5 +65,10 @@
 
 <p>这是我第一次尝试建立自己的博客，欢迎大家前来参观</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>前端面试题记录</title>
+    <url>/2021/06/03/web-title/</url>
+    <content><![CDATA[]]></content>
   </entry>
 </search>
