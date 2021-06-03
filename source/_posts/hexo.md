@@ -1,5 +1,5 @@
 ---
-title: Hexo + Next + github 博客搭建
+title: Hexo + Next + Github 博客搭建
 categories: Hexo
 date: 2021-06-01 15:26:28
 tags:
@@ -15,8 +15,7 @@ tags:
   4. GitHub创建个人仓库
   5. 生成SSH添加到GitHub
   6. 将hexo部署到GitHub
-  7. 设置个人域名
-  8. 发布文章
+  7. 其余补充
 
 ### 1. 安装Git
   windows：到git官网上下载,[Download git](https://gitforwindows.org/),下载后会有一个Git Bash的命令行工具
@@ -87,6 +86,43 @@ tags:
   ```
   deploy:
   type: git
-  repo: https://github.com/YourgithubName/YourgithubName.github.io.git
+  repo: git@github.com/YourgithubName/YourgithubName.github.io.git
   branch: master
+  ```
+
+  这个时候需要先安装deploy-git ，也就是部署的命令,这样你才能用命令部署到GitHub。
+  `npm install hexo-deployer-git --save`
+  然后
+  ```
+  hexo clean
+  hexo generate
+  hexo deploy
+  ```
+
+  其中 hexo clean清除了你之前生成的东西，也可以不加。
+  hexo generate 顾名思义，生成静态文章，可以用 hexo g缩写
+  hexo deploy 部署文章，可以用hexo d缩写
+
+  这样就可以在网站看到博客了
+
+  另外  ！！！
+  由于hexo d上传部署到github的其实是hexo编译后的文件，是用来生成网页的，不包含源文件。
+  所以当我们在其他电脑进行操作写作的时候 需要将源文件上传到分支。将分支克隆下来，除了git文件外其他文件进行删除，将之前的源文件复制进来替换，除了.deploy_git不进行复制。复制过来的源文件应该有一个.gitignore，用来忽略一些不需要的文件，如果没有的话，自己新建一个，在里面写上如下，表示这些类型文件不需要git：
+  ```
+  .DS_Store
+  Thumbs.db
+  db.json
+  *.log
+  node_modules/
+  public/
+  .deploy*/
+  ```
+
+### 7. 其余补充
+  * 新建文章文件夹命令：`hexo new page title(新建文章文件夹名称)`
+  * 新建文章命令：`hexo new title(新建文章名称)`
+  * 设置文章更新时间：在next主题中找到_config.yml在里面查找 update 会找到一个 updated_at 的属性改为 true 即可。
+  ```
+  post_meta:
+  updated_at: true
   ```
