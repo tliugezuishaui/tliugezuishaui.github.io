@@ -67,8 +67,14 @@
 ]]></content>
   </entry>
   <entry>
-    <title>前端面试题记录</title>
+    <title>前端记录</title>
     <url>/2021/06/03/web-title/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<meta name="referrer" content="no-referrer"/>
+<span id="more"></span>
+
+<h4 id="1-数组扁平化"><a href="#1-数组扁平化" class="headerlink" title="1. 数组扁平化"></a>1. 数组扁平化</h4><p>  题目描述:实现一个方法使多维数组变成一维数组<br>  递归版本：<br>    <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function flatter(arr) &#123;</span><br><span class="line">  if (!arr.length) return;</span><br><span class="line">    return arr.reduce(</span><br><span class="line">      (pre, cur) =&gt;</span><br><span class="line">        Array.isArray(cur) ? [...pre, ...flatter(cur)] : [...pre, cur],</span><br><span class="line">      []</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">console.log(flatter([1, 2, [1, [2, 3, [4, 5, [6]]]]]));</span><br></pre></td></tr></table></figure><br>    迭代思路实现：</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function flatter(arr) &#123;</span><br><span class="line">  if (!arr.length) return;</span><br><span class="line">    while (arr.some((item) =&gt; Array.isArray(item))) &#123;</span><br><span class="line">      arr = [].concat(...arr);</span><br><span class="line">  &#125;</span><br><span class="line">  return arr;</span><br><span class="line">&#125;</span><br><span class="line">console.log(flatter([1, 2, [1, [2, 3, [4, 5, [6]]]]]));</span><br></pre></td></tr></table></figure>
+</code></pre>
+]]></content>
   </entry>
 </search>
