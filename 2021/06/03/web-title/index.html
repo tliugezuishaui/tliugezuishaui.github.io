@@ -85,7 +85,7 @@
 <meta property="og:site_name" content="Gslms">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-06-03T01:27:19.000Z">
-<meta property="article:modified_time" content="2021-06-03T02:35:14.972Z">
+<meta property="article:modified_time" content="2021-06-09T02:14:22.242Z">
 <meta property="article:author" content="gslms">
 <meta name="twitter:card" content="summary">
 
@@ -359,8 +359,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-06-03T10:35:14+08:00">
-                2021-06-03
+              <time title="更新于" itemprop="dateModified" datetime="2021-06-09T10:14:22+08:00">
+                2021-06-09
               </time>
             
           </span>
@@ -398,6 +398,20 @@
 
 <h4 id="1-数组扁平化"><a href="#1-数组扁平化" class="headerlink" title="1. 数组扁平化"></a>1. 数组扁平化</h4><p>  题目描述:实现一个方法使多维数组变成一维数组<br>  递归版本：<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function flatter(arr) &#123;</span><br><span class="line">  if (!arr.length) return;</span><br><span class="line">    return arr.reduce(</span><br><span class="line">      (pre, cur) =&gt;</span><br><span class="line">        Array.isArray(cur) ? [...pre, ...flatter(cur)] : [...pre, cur],</span><br><span class="line">      []</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">console.log(flatter([1, 2, [1, [2, 3, [4, 5, [6]]]]]));</span><br></pre></td></tr></table></figure><br>    迭代思路实现：</p>
 <pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function flatter(arr) &#123;</span><br><span class="line">  if (!arr.length) return;</span><br><span class="line">    while (arr.some((item) =&gt; Array.isArray(item))) &#123;</span><br><span class="line">      arr = [].concat(...arr);</span><br><span class="line">  &#125;</span><br><span class="line">  return arr;</span><br><span class="line">&#125;</span><br><span class="line">console.log(flatter([1, 2, [1, [2, 3, [4, 5, [6]]]]]));</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h4 id="2-bind、call、apply-改变this指向-三者的区别"><a href="#2-bind、call、apply-改变this指向-三者的区别" class="headerlink" title="2. bind、call、apply 改变this指向 三者的区别"></a>2. bind、call、apply 改变this指向 三者的区别</h4><p>  三种方法都可以用来改变函数this对象指向的，第一个参数都是this要指向的对象，后面的参数进行传参<br>  demo:<br>    <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> var xw = &#123;</span><br><span class="line">  name : &quot;小王&quot;,</span><br><span class="line">  gender : &quot;男&quot;,</span><br><span class="line">  age : 24,</span><br><span class="line">  say : function() &#123;</span><br><span class="line">          alert(this.name + &quot; , &quot; + this.gender + &quot; ,今年&quot; + this.age);                                </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var xh = &#123;</span><br><span class="line">  name : &quot;小红&quot;,</span><br><span class="line">  gender : &quot;女&quot;,</span><br><span class="line">  age : 18</span><br><span class="line">&#125;</span><br><span class="line">xw.say();</span><br></pre></td></tr></table></figure></p>
+<p>  改变this指向调用say函数 输出小红的内容</p>
+<ol>
+<li><p>bind方法<br>由于bind方法返回的是一个函数，所以在执行时需要再进行调用<br><code>xw.say.bind(xh, &#39;传递的参数&#39;)()</code></p>
+</li>
+<li><p>call方法<br><code>xw.say.call(xh, &#39;传递的参数&#39;)</code></p>
+</li>
+<li><p>apply方法<br>该方法第二个参数是一个数组，在传递时 使用数组传递<br><code>xw.say.apply(xh, [传递的参数])</code></p>
+</li>
+</ol>
+<h5 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h5><pre><code>三个方法都是用来改变this指向的
+bind方法返回的是一个函数，需要进行执行来调用 传递参数和call方法一样
+call方法和apply方法都是对函数直接进行调用 传递参数不同 apply方法传递的参数是一个数组形式
 </code></pre>
 
       
@@ -558,7 +572,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%95%B0%E7%BB%84%E6%89%81%E5%B9%B3%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">1. 数组扁平化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%95%B0%E7%BB%84%E6%89%81%E5%B9%B3%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">1. 数组扁平化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-bind%E3%80%81call%E3%80%81apply-%E6%94%B9%E5%8F%98this%E6%8C%87%E5%90%91-%E4%B8%89%E8%80%85%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.</span> <span class="nav-text">2. bind、call、apply 改变this指向 三者的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.</span> <span class="nav-text">区别</span></a></li></ol></li></ol></div>
             
 
           </div>
