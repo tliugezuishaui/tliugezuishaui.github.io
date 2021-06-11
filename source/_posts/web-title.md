@@ -72,19 +72,18 @@ tags:
 
 
   ##### 区别
-    三个方法都是用来改变this指向的
-    bind方法返回的是一个函数，需要进行执行来调用 传递参数和call方法一样
-    call方法和apply方法都是对函数直接进行调用 传递参数不同 apply方法传递的参数是一个数组形式
+  三个方法都是用来改变this指向的
+  bind方法返回的是一个函数，需要进行执行来调用 传递参数和call方法一样
+  call方法和apply方法都是对函数直接进行调用 传递参数不同 apply方法传递的参数是一个数组形式
 
 
   #### 3. js实现大文件分片上传的方法
-    借助js的Blob对象FormData对象可以实现大文件分片上传的功能，关于Blob和FormData的具体使用方法可以到如下地址去查看
-    [FormData 对象的使用](https://developer.mozilla.org/zh-CN/docs/Web/API/FormData/Using_FormData_Objects)
-    [Blob 对象的使用](https://developer.mozilla.org/zh-CN/docs/Web/API/Blob)
+  借助js的Blob对象FormData对象可以实现大文件分片上传的功能，关于Blob和FormData的具体使用方法可以到如下地址去查看
+  [FormData 对象的使用](https://developer.mozilla.org/zh-CN/docs/Web/API/FormData/Using_FormData_Objects)
+  [Blob 对象的使用](https://developer.mozilla.org/zh-CN/docs/Web/API/Blob)
     
-    以下是实现代码，本例中后端代码使用php来实现，只是演示基本功能，具体一些文件验证逻辑先忽略。
-    前端代码：
-    
+  以下是实现代码，本例中后端代码使用php来实现，只是演示基本功能，具体一些文件验证逻辑先忽略。
+  前端代码：
     ```
     <!DOCTYPE html>
     <html lang="en">
@@ -142,12 +141,87 @@ tags:
     ```
   后端php代码：
   ```
-  <?php
+    <?php
 
-  header('Access-Control-Allow-Origin:*');
-  header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+    header('Access-Control-Allow-Origin:*');
+    header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
-  $file = $_FILES['file'];
-  $filename = $file['name'];
-  file_put_contents($filename, file_get_contents($file['tmp_name']), FILE_APPEND);
+    $file = $_FILES['file'];
+    $filename = $file['name'];
+    file_put_contents($filename, file_get_contents($file['tmp_name']), FILE_APPEND);
   ```
+
+  #### 4. Object.key()方法
+  Object.keys()方法会返回一个由一个给定对象的自身可枚举属性组成的数组，数组中属性名的排列顺序和正常循环遍历该对象时返回的顺序一致
+
+  语法： `Object.keys(obj)`
+
+  参数：obj要返回其枚举自身属性的对象
+
+  返回值：一个表示给定对象的所有可枚举属性的字符串数组。
+
+
+
+
+  #### 5. require 和 import 引入 js 有什么区别？
+  一. require
+  
+  require是Commonjs规范，node应用是由模块组成的，遵循commonjs的规范。
+
+  示例代码：
+
+  a.js
+      ```
+      function text(args) {
+        conosle.log(args)
+      }
+
+      //暴露方式
+      module.export = {
+        text
+      }
+      ```
+
+  b.js
+      ```
+      //引入js
+      let { text } = require('./a.js');
+
+      text('this is a text')
+      ```
+
+  require的核心概念：在导出的文件中定义module.exports，导出的对象类型不予限定（可为任意类型）。在导入的文件中使用require()引入即可使用。本质上，是将要导出的对象，赋值给module这个对象的exports属性，在其他文件中通过require这个方法来访问exports这个属性。上面b.js中，require(./a.js) = exports 这个对象，然后使用es6取值方式从exports对象中取出test的值。
+
+
+  二、import 
+
+  import 是es6为js模块化提出的新语法，import 导入 要与export 导出结合使用
+
+  示例代码：
+      
+  a.js
+        ```
+        export function text(args) {
+          conosle.log(args);
+        }
+
+        //默认导出模块，一个文件只能定义一个
+        export default function() {...};
+
+        export const name = 'lg';
+        
+        ```
+        
+  b.js
+        ```
+        //_代表引入的export default的内容
+        
+        import _, { text, name } from './a.js';
+
+        text(`my name is ${name}`);
+        ```
+
+
+  三、commonjs模块与ES6模块的区别
+    1、commonjs输出的，是一个值的拷贝，而es6输出的是值的引用。
+    2、commonjs是运行时加载的，es6是编译时输出接口。
